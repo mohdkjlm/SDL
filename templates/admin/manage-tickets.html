@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Manage tickets | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <div>
+        <span class="eyebrow" data-i18n="adminWorkspace">
+            ADMIN WORKSPACE
+        </span>
+
+        <h1 data-i18n="manageTickets">
+            Manage tickets
+        </h1>
+
+        <p data-i18n="manageTicketsSubtitle">
+            Assign the right person. Keep every request moving.
+        </p>
+    </div>
+
+    <a class="button secondary" href="{% url 'ManageUsers' %}" data-i18n="manageUsers"></a> Manage users
+    </a>
+
+</section>
+
+<section class="card">
+
+    <div id="ticket-filters"></div>
+
+    <div id="tickets-table">
+
+        {% for ticket in tickets %}
+
+        <div class="card">
+
+            <h3>{{ ticket.title }}</h3>
+
+            <p>{{ ticket.description }}</p>
+
+            <span class="pill">
+                {{ ticket.status }}
+            </span>
+            {% if ticket.status == "Resolved" %}
+
+            <form method="POST" action="{% url 'CloseTicket' ticket.id %}">
+                {% csrf_token %}
+
+                <button class="button primary" type="submit">
+                    Close
+                </button>
+            </form>
+
+            {% endif %}
+            {% if ticket.status == "New" %}
+            <form method="POST" action="{% url 'AssignTicket' ticket.id %}">
+                {% csrf_token %}
+
+                <select name="assigned_to" required>
+                    <option value="">Choose technician</option>
+                    {% for technician in technicians %}
+                    <option value="{{ technician.user.username }}">
+                        {{ technician.user.username }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <button class="button primary" type="submit">
+                    Assign
+                </button>
+            </form>
+            {% endif %}
+
+            <small>
+                {{ ticket.created_at }}
+            </small>
+        </div>
+
+        {% empty %}
+
+        <p>No tickets yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <div id="table-summary" class="table-summary" aria-live="polite">
+    </div>
+
+</section>
+
+{% endblock %}

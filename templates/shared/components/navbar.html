@@ -1,0 +1,9 @@
+<!-- Future Django: include this component from base.html. -->
+<div class="topbar-start"><button type="button" class="icon-button menu-toggle" id="menu-toggle" aria-controls="sidebar"
+        aria-expanded="false" data-i18n-aria="toggleMenu">☰</button><span class="breadcrumb"><span
+            data-i18n="workspaceShort">Workspace</span><span>/</span><strong id="breadcrumb-page"></strong></span></div>
+<div class="topbar-actions"><span class="environment"><span></span><span data-i18n="demoMode">Demo
+            workspace</span></span><button type="button" id="language-toggle" class="language-button"
+        aria-label="Switch to Arabic">العربية</button><button type="button" id="theme-toggle" class="icon-button"
+        data-i18n-aria="toggleTheme">☾</button><span class="topbar-divider"></span><a class="avatar avatar-small"
+        id="header-avatar" data-link="shared/profile.html" data-i18n-aria="profile">{{ request.user.username|slice:":2"|upper }}</a></div>

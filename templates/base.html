@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}ServiceDesk Lite{% endblock %}</title>
+
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  <script defer  src="{% static 'js/theme.js' %}"></script>
+  <script defer src="{% static 'js/language.js' %}"></script>
+  <script defer src="{% static 'js/main.js' %}"></script>
+</head>
+
+<body>
+
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <div class="app-shell">
+
+    <aside class="sidebar" id="sidebar">
+
+      <a class="brand" href="/">
+        <span class="brand-mark">s<span>•</span></span>
+        <span>
+          ServiceDesk <b>Lite</b>
+          <small>SUPPORT WORKSPACE</small>
+        </span>
+      </a>
+
+      <div class="workspace-label">
+        <span class="workspace-dot"></span>
+        <span>Acme workspace</span>
+        <span class="tiny-tag">Demo</span>
+      </div>
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <nav id="role-nav"></nav>
+
+      <div class="sidebar-bottom">
+
+        <div class="help-card">
+          <span class="help-icon">?</span>
+          <strong>A little help goes a long way.</strong>
+          <p>Keep your team moving. We’ll take care of the technical side.</p>
+        </div>
+
+      </div>
+
+    </aside>
+
+    <div class="workspace">
+
+      {% include 'shared/components/navbar.html' %}
+
+      <main id="main-content">
+        {% block content %}
+        {% endblock %}
+      </main>
+
+      {% include 'shared/components/footer.html' %}
+
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+
+</body>
+
+</html>

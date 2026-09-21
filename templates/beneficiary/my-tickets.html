@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My tickets | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <div>
+        <span class="eyebrow" data-i18n="supportOnTrack">
+            YOUR SUPPORT, ON TRACK
+        </span>
+
+        <h1 data-i18n="myTickets">
+            My tickets
+        </h1>
+
+        <p data-i18n="myTicketsSubtitle">
+            Every request. Every update. Right here.
+        </p>
+    </div>
+
+    <a class="button primary" href="{% url 'CreateTicket' %}">
+
+        <span>＋</span>
+
+        <span data-i18n="createTicket">
+            Create ticket
+        </span>
+
+    </a>
+
+</section>
+
+<section class="card">
+
+    <div id="ticket-filters"></div>
+
+    <div id="tickets-table">
+
+        {% for ticket in tickets %}
+
+        <div class="card">
+            <h3>{{ ticket.title }}</h3>
+
+            <p>{{ ticket.description }}</p>
+
+            <span class="pill">
+                {{ ticket.status }}
+            </span>
+
+            <small>
+                {{ ticket.created_at }}
+            </small>
+        </div>
+
+        {% empty %}
+
+        <p>No tickets yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <div id="table-summary" class="table-summary" aria-live="polite">
+    </div>
+
+</section>
+
+{% endblock %}

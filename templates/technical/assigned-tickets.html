@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Assigned tickets | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <div>
+        <span class="eyebrow" data-i18n="technicalWorkspace">
+            TECHNICAL WORKSPACE
+        </span>
+        <h1 data-i18n="assignedTickets">
+            Assigned tickets
+        </h1>
+        <p data-i18n="assignedSubtitle">
+            A focused view of the requests that need your expertise.
+        </p>
+    </div>
+    <span class="pill" data-i18n="yourAssignments">
+        Your assignments only
+    </span>
+</section>
+<section class="card">
+    <div id="ticket-filters"></div>
+    <div id="tickets-table">
+        {% for ticket in tickets %}
+        <div class="card">
+            <h3>{{ ticket.title }}</h3>
+            <p>{{ ticket.description }}</p>
+            <span class="pill">
+                {{ ticket.status }}
+            </span>
+            <small>
+                {{ ticket.created_at }}
+            </small>
+            {% if ticket.status == "Assigned" %}
+            <form method="POST" action="{% url 'StartTicket' ticket.id %}">
+                {% csrf_token %}
+                <button class="button primary" type="submit">
+                    Start
+                </button>
+            </form>
+            {% endif %}
+            {% if ticket.status == "In Progress" %}
+            <form method="POST" action="{% url 'ResolveTicket' ticket.id %}">
+                {% csrf_token %}
+                <button class="button primary" type="submit">
+                    Resolve
+                </button>
+            </form>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>No assigned tickets yet.</p>
+        {% endfor %}
+    </div>
+    <div id="table-summary" class="table-summary" aria-live="polite">
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Create ticket | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <div>
+        <a class="back-link" href="{% url 'MyTickets' %}" data-i18n="backTickets">
+            ← Back to tickets
+        </a>
+
+        <h1 data-i18n="createTicket">
+            Create ticket
+        </h1>
+
+        <p data-i18n="createSubtitle">
+            Let’s get it sorted. Share a few details about the issue.
+        </p>
+    </div>
+</section>
+
+<div class="form-layout">
+
+    <section class="card form-card">
+
+        <div class="card-heading">
+            <h2 data-i18n="requestDetails">
+                Request details
+            </h2>
+
+            <span class="muted small" data-i18n="requiredHint">
+                * Required fields
+            </span>
+        </div>
+
+        <form id="create-ticket-form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="form-field">
+
+                <label for="ticket-title">
+                    <span data-i18n="title">Title</span> *
+                </label>
+
+                <input id="ticket-title" name="title" required minlength="5" maxlength="120"
+                    data-i18n-placeholder="titlePlaceholder" placeholder="e.g. Unable to connect to the office Wi-Fi">
+
+                <small data-i18n="titleHint">
+                    A short, specific summary helps us find the right solution.
+                </small>
+
+            </div>
+
+            <div class="form-field">
+
+                <label for="ticket-description">
+                    <span data-i18n="description">
+                        Description
+                    </span> *
+                </label>
+
+                <textarea id="ticket-description" name="description" rows="7" required minlength="15" maxlength="4000"
+                    data-i18n-placeholder="descriptionPlaceholder"
+                    placeholder="What happened? When did it start? What have you tried?"></textarea>
+
+                <small data-i18n="descriptionHint">
+                    Include any error messages and steps to reproduce the issue.
+                </small>
+
+            </div>
+
+            <div class="form-field">
+
+                <label for="ticket-image">
+
+                    <span data-i18n="attachment">
+                        Image attachment
+                    </span>
+
+                    <span class="muted" data-i18n="optional">
+                        (optional)
+                    </span>
+
+                </label>
+
+                <div class="upload-box">
+
+                    <span class="upload-symbol">↥</span>
+
+                    <strong data-i18n="uploadHint">
+                        A picture can help tell the story.
+                    </strong>
+
+                    <span data-i18n="imageLimits">
+                        PNG, JPG or WebP · Up to 2 MB
+                    </span>
+
+                    <input id="ticket-image" name="image" type="file" accept="image/png,image/jpeg,image/webp"
+                        aria-describedby="image-error">
+
+                </div>
+
+                <p id="image-error" class="field-error" role="alert" hidden>
+                </p>
+
+                <img id="image-preview" class="image-preview" alt="Selected attachment preview"
+                    data-i18n-alt="attachmentPreview" hidden>
+
+                <button type="button" id="remove-image" class="text-button" data-i18n="removeImage" hidden>
+                    Remove image
+                </button>
+
+            </div>
+
+            <div id="form-error" class="alert error" role="alert" hidden>
+            </div>
+
+            <div class="form-actions">
+
+                <span class="muted small" data-i18n="localSaveHint">
+                    Saved in this browser for the demo.
+                </span>
+
+                <a class="button secondary" href="{% url 'MyTickets' %}" data-i18n="cancel">
+                    Cancel
+                </a>
+
+                <button class="button primary" type="submit" data-i18n="submitTicket">
+                    Submit ticket →
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+    <aside>
+
+        <div class="card tips-card">
+
+            <span class="role-icon">✧</span>
+
+            <h2 data-i18n="betterDetails">
+                Better details. Faster help.
+            </h2>
+
+            <ul class="tips-list">
+
+                <li data-i18n="tipOne">
+                    Tell us which device or application is affected.
+                </li>
+
+                <li data-i18n="tipTwo">
+                    Describe what you expected and what happened instead.
+                </li>
+
+                <li data-i18n="tipThree">
+                    Attach a screenshot if it helps explain the problem.
+                </li>
+
+                <li data-i18n="tipFour">
+                    Keep passwords and sensitive information out of your request.
+                </li>
+
+            </ul>
+
+        </div>
+
+        <p class="aside-note" data-i18n="nextSteps">
+            What happens next? Your ticket starts as New.
+            An admin assigns a technician, and you can follow every update in My tickets.
+        </p>
+
+    </aside>
+
+</div>
+
+{% endblock %}

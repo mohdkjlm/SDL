@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Technical dashboard | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <div>
+        <span class="eyebrow" data-i18n="technicalWorkspace">
+            TECHNICAL WORKSPACE
+        </span>
+        <h1>
+            <span data-i18n="technicalGreeting"></span>
+            {{ request.user.username }}
+        </h1>
+
+        <p data-i18n="technicalSubtitle">
+            Your queue is ready. One solution at a time.
+        </p>
+    </div>
+
+    <a class="button primary" href="{% url 'AssignedTickets' %}" data-i18n="viewQueue">
+        View your queue →
+    </a>
+
+</section>
+
+<section class="stats-grid" id="dashboard-stats" data-i18n-aria="ticketStatistics" aria-label="Ticket statistics">
+</section>
+
+<section class="dashboard-columns">
+
+    <div class="card">
+
+        <div class="card-heading">
+
+            <div>
+                <h2 data-i18n="yourQueue">
+                    Your ticket queue
+                </h2>
+
+                <p data-i18n="queueHint">
+                    The latest requests assigned to you.
+                </p>
+            </div>
+
+            <a class="text-link" href="{% url 'AssignedTickets' %}" data-i18n="viewAll"></a>
+            View all →
+            </a>
+
+        </div>
+
+        <div id="recent-tickets"></div>
+
+    </div>
+
+    <aside class="card activity-card">
+
+        <div class="card-heading">
+            <h2 data-i18n="recentActivity">
+                Recent activity
+            </h2>
+        </div>
+
+        <div id="recent-activity" class="activity-list">
+        </div>
+
+    </aside>
+
+</section>
+
+<div class="support-banner">
+
+    <span class="banner-symbol">✓</span>
+
+    <div>
+        <h2 data-i18n="resolutionMatters">
+            A good resolution leaves a clear trail.
+        </h2>
+
+        <p data-i18n="resolutionTip">
+            Add helpful resolution notes so everyone knows what changed.
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

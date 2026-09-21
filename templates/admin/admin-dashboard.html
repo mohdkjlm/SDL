@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Admin dashboard | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <div>
+        <span class="eyebrow" data-i18n="adminWorkspace">
+            ADMIN WORKSPACE
+        </span>
+
+        <h1 data-i18n="adminGreeting">
+            The big picture, {{ request.user.username }}.
+        </h1>
+
+        <p data-i18n="adminSubtitle">
+            A clear view of your support team and the people counting on them.
+        </p>
+    </div>
+
+    <a class="button primary" href="{% url 'ManageTickets' %}" data-i18n="manageTickets">
+        Manage tickets
+    </a>
+</section>
+
+<section class="stats-grid" id="dashboard-stats" data-i18n-aria="ticketStatistics" aria-label="Ticket statistics">
+</section>
+
+<section class="overview-columns">
+
+    <div class="card">
+        <div class="card-heading">
+
+            <div>
+                <h2 data-i18n="ticketsByStatus">
+                    Tickets by status
+                </h2>
+
+                <p data-i18n="liveOverview">
+                    A snapshot of your demo workspace.
+                </p>
+            </div>
+
+            <span class="pill" data-i18n="allTime">
+                All time
+            </span>
+
+        </div>
+
+        <div id="status-chart" class="status-chart"></div>
+    </div>
+
+    <div class="card">
+        <div class="card-heading">
+
+            <h2 data-i18n="yourPeople">
+                Your people
+            </h2>
+
+            <a class="text-link" href="{% url 'ManageUsers' %}" data-i18n="manage"></a> Manage →
+            </a>
+
+        </div>
+
+        <div id="user-stats" class="user-stats"></div>
+    </div>
+
+</section>
+
+<section class="card">
+
+    <div class="card-heading">
+
+        <div>
+            <h2 data-i18n="latestTickets">
+                Latest tickets
+            </h2>
+
+            <p data-i18n="adminRecentHint">
+                Keep requests moving in the right direction.
+            </p>
+        </div>
+
+        <a class="text-link" href="{% url 'ManageTickets' %}" data-i18n="viewAll">
+            View all →
+        </a>
+
+    </div>
+
+    <div id="recent-tickets"></div>
+
+</section>
+
+{% endblock %}

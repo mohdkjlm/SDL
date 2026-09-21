@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <div>
+        <div class="eyebrow" data-i18n="yourWorkspace">
+            YOUR WORKSPACE, AT A GLANCE
+        </div>
+
+        <h1 data-i18n="beneficiaryGreeting">
+            Welcome back, {{ request.user.username }} <span class="wave">✦</span>
+        </h1>
+
+        <p data-i18n="beneficiarySubtitle">
+            A little less troubleshooting. A little more getting things done.
+        </p>
+    </div>
+
+    <a class="button primary" href="{% url 'CreateTicket' %}">
+
+    </a> <span>＋</span>
+    <span data-i18n="createTicket">Create ticket</span>
+    </a>
+</section>
+
+<section class="stats-grid" id="dashboard-stats" aria-label="Ticket statistics" data-i18n-aria="ticketStatistics">
+</section>
+
+<section class="dashboard-columns">
+
+    <div class="card tickets-card">
+
+        <div class="card-heading">
+            <div>
+                <h2 data-i18n="recentTickets">
+                    Recent tickets
+                </h2>
+
+                <p data-i18n="recentTicketsHint">
+                    Your latest requests and where they stand.
+                </p>
+            </div>
+
+            <a class="text-link" href="{% url 'MyTickets' %}" data-i18n="viewAll">
+                View all →
+            </a>
+        </div>
+
+        <div id="recent-tickets"></div>
+
+    </div>
+
+    <aside class="card activity-card">
+
+        <div class="card-heading">
+            <h2 data-i18n="recentActivity">
+                Recent activity
+            </h2>
+
+            <span class="activity-dot"></span>
+        </div>
+
+        <div id="recent-activity" class="activity-list"></div>
+
+        <div class="activity-footer" data-i18n="allCaughtUp">
+            You’re all caught up.
+        </div>
+
+    </aside>
+
+</section>
+
+<section class="support-banner">
+
+    <span class="banner-symbol">◎</span>
+
+    <div>
+        <h2 data-i18n="somethingWrong">
+            Something getting in your way?
+        </h2>
+
+        <p data-i18n="supportBannerText">
+            Tell us what’s happening. Our technical team is here to help.
+        </p>
+    </div>
+
+    <a class="button secondary" href="{% url 'CreateTicket' %}" data-i18n="newRequest">
+        Start a new request →
+    </a>
+
+</section>
+
+{% endblock %}

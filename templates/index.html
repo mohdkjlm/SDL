@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Welcome | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="landing-hero">
+
+  <div class="hero-copy">
+
+    <span class="eyebrow">
+      <span class="system-dot"></span>
+      <span data-i18n="heroEyebrow">
+        LESS FRICTION. MORE PROGRESS.
+      </span>
+    </span>
+
+    <h1 data-i18n="heroTitle">
+      Good support.<br>
+      A better workday.
+    </h1>
+
+    <p data-i18n="heroDescription">
+      From the first request to the final resolution,
+      keep your technical support in one calm, organized place.
+    </p>
+
+    <div class="button-row">
+      <a class="button primary" href="{% url 'login' %}" data-i18n="openWorkspace">
+        Open your workspace →
+      </a>
+
+      <a class="button secondary" href="{% url 'CreateTicket' %}" data-i18n="requestSupport">
+        Request support
+      </a>
+    </div>
+
+  </div>
+
+  <div class="hero-visual">
+
+    <div class="visual-top">
+      <span class="brand-mark">s<span>•</span></span>
+
+      <span class="tiny-tag" data-i18n="supportSimplified">
+        SUPPORT, SIMPLIFIED
+      </span>
+    </div>
+
+    <h2 data-i18n="allUnderControl">
+      Everything.<br>
+      Under control.
+    </h2>
+
+  </div>
+
+</section>
+
+<section class="role-section">
+
+  <div class="section-heading">
+    <div>
+      <span class="eyebrow" data-i18n="oneWorkspace">
+        ONE WORKSPACE. EVERY PERSPECTIVE.
+      </span>
+
+      <h2 data-i18n="findYourFlow">
+        Find your flow.
+      </h2>
+    </div>
+
+    <p data-i18n="chooseRoleText">
+      Explore the demo from your side of the desk.
+    </p>
+  </div>
+
+  <div class="role-grid">
+
+    <a class="role-card" href="{% url 'Beneficiary' %}">
+      <span class="role-icon">◎</span>
+
+      <h3 data-i18n="Beneficiary">
+        Beneficiary
+      </h3>
+    </a>
+
+    <a class="role-card" href="{% url 'Technical' %}">
+      <span class="role-icon">⌘</span>
+
+      <h3 data-i18n="Technical">
+        Technical
+      </h3>
+    </a>
+
+    <a class="role-card" href="{% url 'Admin' %}">
+      <span class="role-icon">▦</span>
+
+      <h3 data-i18n="Admin">
+        Admin
+      </h3>
+    </a>
+
+  </div>
+
+</section>
+
+{% endblock %}

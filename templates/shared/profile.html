@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile | ServiceDesk Lite</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="../../static/js/theme.js"></script>
+    <script defer src="../../static/js/language.js"></script>
+    <script defer src="../../static/js/demo-data.js"></script>
+    <script defer src="../../static/js/main.js"></script>
+</head>
+
+<body data-page="profile" data-root="../">
+    <div id="app"></div><template id="page-content">
+        <section class="page-heading">
+            <div><span class="eyebrow" data-i18n="yourAccount">YOUR ACCOUNT</span>
+                <h1 data-i18n="profile">Profile</h1>
+                <p data-i18n="profileSubtitle">Your details, your preferences, your workspace.</p>
+            </div>
+        </section>
+        <div class="profile-layout">
+            <aside class="card profile-summary" id="profile-summary"></aside>
+            <section class="card form-card">
+                <div class="card-heading">
+                    <h2 data-i18n="personalDetails">Personal details</h2>
+                </div>
+                <form id="profile-form">
+                    <div class="form-field"><label for="profile-name" data-i18n="fullName">Full name</label><input
+                            id="profile-name" required minlength="2" maxlength="80" autocomplete="name"></div>
+                    <div class="form-field"><label for="profile-email" data-i18n="email">Email address</label><input
+                            id="profile-email" required type="email" maxlength="120" autocomplete="email"></div>
+                    <div class="form-field"><label for="profile-department"
+                            data-i18n="department">Department</label><input id="profile-department" maxlength="80">
+                    </div>
+                    <div class="alert info" data-i18n="profileDemoHint">Changes update this demo persona in your browser
+                        only.</div>
+                    <div id="profile-error" class="alert error" role="alert" hidden></div>
+                    <div class="form-actions"><button class="button primary" type="submit" data-i18n="saveChanges">Save
+                            changes</button></div>
+                </form>
+            </section>
+        </div>
+        <section class="card preferences-card">
+            <h2 data-i18n="workspacePreferences">Workspace preferences</h2>
+            <p class="muted" data-i18n="preferencesHint">Use the language and theme controls in the top bar. Your
+                preferences are remembered on this device.</p>
+            <div class="preference-actions"><a class="button secondary" data-link="login.html"
+                    data-i18n="switchRole">Switch demo role</a><button type="button" class="button danger-outline"
+                    id="reset-demo" data-i18n="resetDemo">Reset demo data</button></div>
+            <p class="small muted" data-i18n="resetHint">Reset restores sample tickets and users; language and theme are
+                kept.</p>
+        </section>
+    </template><noscript>Please enable JavaScript. / يرجى تفعيل جافاسكريبت.</noscript>
+</body>
+
+</html>

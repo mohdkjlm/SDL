@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Manage users | ServiceDesk Lite
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <div>
+        <span class="eyebrow" data-i18n="adminWorkspace">
+            ADMIN WORKSPACE
+        </span>
+
+        <h1 data-i18n="manageUsers">
+            Manage users
+        </h1>
+
+        <p data-i18n="manageUsersSubtitle">
+            Good support starts with the right people.
+        </p>
+    </div>
+
+    <button class="button primary" id="add-user-button" type="button">
+        <span>＋</span>
+        <span data-i18n="addUser">Add user</span>
+    </button>
+</section>
+
+
+<section class="stats-grid three" id="manage-user-stats"></section>
+
+
+<section class="card">
+
+    <div class="filter-bar">
+
+        <div class="search-field">
+            <label class="sr-only" for="user-search" data-i18n="searchUsers">
+                Search users
+            </label>
+
+            <span aria-hidden="true">⌕</span>
+
+            <input id="user-search" type="search" data-i18n-placeholder="searchUsers" placeholder="Search users">
+        </div>
+
+
+        <div class="filter-field">
+
+            <label for="user-role-filter" data-i18n="role">
+                Role
+            </label>
+
+            <select id="user-role-filter">
+
+                <option value="all" data-i18n="allRoles">
+                    All roles
+                </option>
+
+                <option value="beneficiary" data-i18n="Beneficiary">
+                    Beneficiary
+                </option>
+
+                <option value="technical" data-i18n="Technical">
+                    Technical
+                </option>
+
+                <option value="admin" data-i18n="Admin">
+                    Admin
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div id="users-table">
+
+        {% for user in users %}
+
+        <div class="card user-item" data-username="{{ user.username|lower }}" data-role="{{ user.profile.role|lower }}">
+
+            <strong>{{ user.username }}</strong>
+            <p>{{ user.profile.role }}</p>
+
+        </div>
+
+        {% empty %}
+
+        <p>لا يوجد مستخدمون.</p>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div id="user-summary" class="table-summary" aria-live="polite"></div>
+
+</section>
+
+
+<dialog id="user-dialog" class="modal">
+
+    <form id="user-form" method="POST">
+
+        {% csrf_token %}
+
+        <div class="card-heading">
+
+            <h2 id="user-dialog-title" data-i18n="addUser">
+                Add user
+            </h2>
+
+            <button class="icon-button" type="button" id="close-user-dialog" data-i18n-aria="cancel">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label for="user-name">
+                Username
+            </label>
+
+            <input id="user-name" name="username" type="text" required minlength="2" maxlength="80"
+                autocomplete="username">
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label for="user-password">
+                Password
+            </label>
+
+            <input id="user-password" name="password" type="password" required autocomplete="new-password">
+
+        </div>
+
+
+        <div class="form-field">
+
+            <label for="user-role" data-i18n="role">
+                Role
+            </label>
+
+            <select id="user-role" name="role" required>
+
+                <option value="beneficiary" data-i18n="Beneficiary">
+                    Beneficiary
+                </option>
+
+                <option value="technical" data-i18n="Technical">
+                    Technical
+                </option>
+
+                <option value="admin" data-i18n="Admin">
+                    Admin
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div id="user-error" class="alert error" role="alert" hidden></div>
+
+
+        <div class="form-actions">
+
+            <button class="button secondary" type="button" id="cancel-user-dialog" data-i18n="cancel">
+                Cancel
+            </button>
+
+            <button class="button primary" type="submit" data-i18n="saveUser">
+                Save user
+            </button>
+
+        </div>
+
+    </form>
+
+</dialog>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const dialog = document.getElementById("user-dialog");
+        const addButton = document.getElementById("add-user-button");
+        const closeButton = document.getElementById("close-user-dialog");
+        const cancelButton = document.getElementById("cancel-user-dialog");
+
+        addButton.addEventListener("click", function () {
+            dialog.showModal();
+        });
+
+        closeButton.addEventListener("click", function () {
+            dialog.close();
+        });
+
+        cancelButton.addEventListener("click", function () {
+            dialog.close();
+        });
+
+
+        const search = document.getElementById("user-search");
+        const roleFilter = document.getElementById("user-role-filter");
+        const users = document.querySelectorAll(".user-item");
+
+        function filterUsers() {
+
+            const searchValue = search.value.toLowerCase();
+            const roleValue = roleFilter.value.toLowerCase();
+
+            users.forEach(function (user) {
+
+                const username = user.dataset.username;
+                const role = user.dataset.role;
+
+                const matchesSearch = username.includes(searchValue);
+
+                const matchesRole =
+                    roleValue === "all" || role === roleValue;
+
+                user.style.display =
+                    matchesSearch && matchesRole ? "" : "none";
+            });
+        }
+
+        search.addEventListener("input", filterUsers);
+        roleFilter.addEventListener("change", filterUsers);
+
+    });
+</script>
+
+{% endblock %}
